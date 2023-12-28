@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement App By Satej</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        li{
+            list-style: none;            
+            padding-top: 10px;
+            display: inline-block;
+            margin-right: 0px !important;
+            margin-left: auto;
+            padding-left: 20px;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+            font-size: larger;
+        }
+        a:hover{
+            text-decoration: none;
+            color: rgb(207, 51, 4);
+        }
+    </style>
+</head>
+<body>
+
+    
+    <div class="bg-dark col-12 d-flex mb-5">
+        <div >
+            <h2 class="text-white pt-1">Placement App</h2>
+        </div>
+        <div class="col-9 ">
+            <ul >
+                <li class=""><a href="/api/interview">Interview</a></li>
+                <li><a href="/api/student">Student</a></li>
+            </ul>
+        </div>
+        
+        <form class="mt-2" action="/logout" method="get">
+            <button class="btn btn-warning mt-1 mb-1 btn-sm mr-0">Logout</button>
+        </form>
+    </div>
+
+
+    <div class="align-items-center col-11 ">
+        <h2 class="text-center">Add Student</h2>
+    </div>
+        
+       
+
+    <div class="container align-items-center">
+        <form class="form col-md-7 ml-auto mr-auto" action="/api/Student/addStudent" method="post">
+            <div class="form-group">
+                <input class="form-control" type="text" required placeholder="Enter Batch" name="batch" id="batch">
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" type="text" required placeholder="Enter Name" name="name" id="name">
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" type="text" required placeholder="Enter Mobile No" name="mobile" id="mobile">
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" type="email" required placeholder="Enter Email" name="email" id="email">
+            </div>
+
+            <div class="form-group col-12">
+                <input class=" col-3 mr-4" type="text" required name="dsaScore" id="dsaScore" placeholder="Enter DSA score">
+                <input class=" col-3 mr-4" type="text" required name="webScore" id="webScore" placeholder="Enter web score">
+                <input class=" col-3" type="text" required name="reactScore" id="reactScore" placeholder="Enter react score">
+            </div>
+
+            <!-- <div class="form-group">
+                <input class="form-control" type="text" required placeholder="Enter Company" name="interviews" id="interviews">
+            </div> -->
+
+            <div class="form-group">
+                <select class="form-control" required name="jobStatus" id="jobStatus">
+                    <option value="placed">Placed</option>
+                    <option value="not placed">Not placed</option>
+                    
+                </select>
+            </div>
+
+            <div class="text-center">
+                <input class="btn btn-success form-group" type="submit" value="Save">
+            </div>
+
+        </form>
+    </div>
+
+    
+
+    
+
+</body>
+</html>
+
+
+

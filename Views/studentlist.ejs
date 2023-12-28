@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement App By Satej</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        li{
+            list-style: none;            
+            padding-top: 10px;
+            display: inline-block;
+            margin-right: 0px !important;
+            margin-left: auto;
+            padding-left: 20px;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+            font-size: larger;
+        }
+        td a{
+            text-decoration: none;
+            color: rgb(17, 17, 17);
+            font-size:medium;
+        }
+        a:hover{
+            text-decoration: none;
+            color: rgb(207, 51, 4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-dark col-12 d-flex mb-5">
+        <div >
+            <h2 class="text-white pt-1">Placement App</h2>
+        </div>
+        <div class="col-9 ">
+            <ul >
+                <li class=""><a href="/api/interview">Interview</a></li>
+                <li><a href="/api/student">Student</a></li>
+                <li><a href="/api/student/downloadReport">Download Report</a></li>
+            </ul>
+        </div>
+        
+        <form class="mt-2" action="/logout" method="get">
+            <button class="btn btn-warning mt-1 mb-1 btn-sm mr-0">Logout</button>
+        </form>
+    </div>
+
+
+    <div class="align-items-center col-11 ">
+        <h2 class="text-center">Student List</h2>
+    </div>
+        
+
+    <div class="container">
+       <a href="addstudent"> <button class="btn btn-primary float-right mb-2">Add Student</button>
+        </a>
+    </div>
+
+    <div class="container">
+        
+        <!-- table.ejs -->
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Batch</th>
+                    <th>Name</th>
+                    <th>Mobile No</th>
+                    <th>Email</th>
+                    <th>DSA</th>
+                    <th>Web</th>
+                    <th>React</th>
+                    <th>Interviews</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% list.forEach(stud => { %>
+                    <tr>
+                        <td><%= stud.batch %></td>
+                        <td><%= stud.name %></td>
+                        <td><%= stud.mobile %></td>
+                        <td><%= stud.email %></td>
+                        <td><%= stud.dsaScore %></td>
+                        <td><%= stud.webScore %></td>
+                        <td><%= stud.reactScore %></td>
+                        <!-- <td><%= stud.interviews.forEach( (intr => intr.companyName + ",")) %></td> -->
+                        <% if(stud.interviews.length) {%>
+                            <td>
+                                <!-- If yes, loop through each interview and display company names -->
+                                <% for(let company of stud.interviews){%>
+                                <a href=" " id="compnay_name"><%=company.companyName%></a>
+                                <%}%>
+                            </td>
+                            <%}else{%>
+                            <!-- If no interviews, display "NONE" -->
+                            <td>NONE</td>
+                            <%}%>
+                        <td><%= stud.jobStatus %></td>
+                        <td> 
+                            <form action="/api/Student/deleteStudent/<%= stud._id %>" method="post">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+</html>
+
+
+

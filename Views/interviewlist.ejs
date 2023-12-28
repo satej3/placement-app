@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement App By Satej</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        li{
+            list-style: none;            
+            padding-top: 10px;
+            display: inline-block;
+            margin-right: 0px !important;
+            margin-left: auto;
+            padding-left: 20px;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+            font-size: larger;
+        }
+        a:hover{
+            text-decoration: none;
+            color: rgb(207, 51, 4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-dark col-12 d-flex mb-5">
+        <div >
+            <h2 class="text-white pt-1">Placement App</h2>
+        </div>
+        <div class="col-9 ">
+            <ul >
+                <li class=""><a href="/api/interview">Interview</a></li>
+                <li><a href="/api/student">Student</a></li>
+            </ul>
+        </div>
+        
+        <form class="mt-2" action="/logout" method="get">
+            <button class="btn btn-warning mt-1 mb-1 btn-sm mr-0">Logout</button>
+        </form>
+    </div>
+
+
+    <div class="align-items-center col-11 ">
+        <h2 class="text-center">Interview List</h2>
+    </div>
+        
+
+    <div class="container">
+       <a href="addinterview"> <button class="btn btn-primary float-right mb-2">Schedule Interview</button>
+        </a>
+    </div>
+
+    <div class="container">
+        
+        <!-- table.ejs -->
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Company Name</th>
+                    <th>Student Name</th>
+                    <th>Email ID</th>
+                    <th>Contact No</th>
+                    <th>Batch</th>
+                    <th>Interview Date</th>
+                    <!-- <th>Status</th> -->
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <% for(let student of list){%> <%i=0%> <% while(i< student.interviews.length){%>
+                    <tr class="row-ref">
+                        <th scope="row"><%= student.interviews[i].companyName %></th>
+                        <td><%= student.name %></td>
+                        <td><%= student.email %></td>
+                        <td><%= student.mobile %></td>
+                        <td><%= student.batch %></td>
+                        <td><%= student.interviews[i].interviewDate.replace('T', ' ') %></td>
+                        <td>
+                            <form
+                                style="display: flex; align-items: center; justify-content: center"
+                                action="/api/Interview/updateInterview/<%=student._id%>?interviewId=<%=student.interviews[i]._id%>"
+                                method="post"
+                            >
+                                <input hidden type="text" name="companyName" value="<%=student.interviews[i].companyName%>" />
+
+                                <select class="form-select" aria-label="Default select example" name="result" id="result" style="min-width: 130px"  >
+                                    <option selected id="delete-options"><%=student.jobStatus%></option>
+                                    <option value="Selected">Selected</option>
+                                    <option value="Not Selected">Not Selected</option>
+                                    <option value="On Hold">On Hold</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+
+                                <button type="submit" class="btn btn-success btn-small m-2">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <%i++%> <%}%> <%}%>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
